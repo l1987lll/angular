@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production",
+    "build": "ng build --configuration dev",
     "pretest": "ng version",
     "test": "ng test && yarn e2e --configuration=ci && yarn e2e --configuration=ci-production",
     "lint": "ng lint",
