@@ -1,0 +1,14 @@
+这个分支的目的是使用/integration/cli-hello-world project去调试angular源码。2022/9/5
+一. 环境。
+1. node版本16.17.0 （当前最新LTS版），安装最新nvm for windows, 然后使用nvm install 16.17.0
+2. yarn版本1.22.19 (当前最新版)，使用npm i -g yarn安装，如遇错误在windows上把yarn.exe卸载，nvm uninstall 其他版本的node.
+3. yarn install的时候会安装bazel，但是需要查看bazel安装文档，配置MSYS2.
+4. 如果yarn install时失败，在几天内多试几次或设置代理：yarn config set proxy https://registry.npm.taobao.org, 用yarn config get proxy检查是否正确设置，（yarn config delete proxy删除设置）
+5. 因为ts-node有bug，只能使用bash执行yarn命令。
+6. 在windows上开启developer mode，否则build时会报bazel没权限创建symlink相关的错。
+7.由于build //packages/upgrade:npm_package会失败报这个错：F:/sources/angular/packages/upgrade/BUILD.bazel:21:11: Bundling types (packages/upgrade/static/testing/testing.d.ts) failed: Worker process did not return a WorkResponse （参看github: https://github.com/angular/angular/issues/46965）
+  所以使用下面命令去只build除upgrade之外的packages：
+  yarn -s bazel build --config=snapshot-build //packages/animations:npm_package //packages/bazel:npm_package //packages/common:npm_package //packages/compiler:npm_package //packages/compiler-cli:npm_package //packages/core:npm_package //packages/elements:npm_package //packages/forms:npm_package //packages/language-service:npm_package //packages/localize:npm_package //packages/platform-browser:npm_package //packages/platform-browser-dynamic:npm_package //packages/platform-server:npm_package //packages/router:npm_package //packages/service-worker:npm_package
+  使用下面的命令去build upgrade package (去除了worker BundlingTypes):
+  yarn -s bazel build --config=snapshot-build --strategy=BundlingTypes=remote,standalone,local //packages/upgrade:npm_package
+  最后运行 yarn run build 去重新build所有packages，这时由于upgrade包没有更改，不会重新build它，所以不会报错，最后将build结果放到/dist/packages-dist目录里。
