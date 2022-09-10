@@ -5,6 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration dev",
+    "postbuild": "node ../../tools/source-map-overrides",
+    "serve": "http-server ./dist",
     "pretest": "ng version",
     "test": "ng test && yarn e2e --configuration=ci && yarn e2e --configuration=ci-production",
     "lint": "ng lint",
@@ -44,5 +46,16 @@
     "ts-node": "8.3.0",
     "tslint": "5.18.0",
     "typescript": "file:../../node_modules/typescript"
-  }
+  },
+  "sourcemapOverrides": [
+    {
+      "file": "./dist",
+      "output": "",
+      "sources": [],
+      "sourceRoot": [
+        "cli-hello-world/dist/[^.]+.js$ |  | ../",
+        "__ivy_ngcc__ |  | ../"
+      ]
+    }
+  ]
 }
