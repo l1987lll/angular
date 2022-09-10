@@ -12,3 +12,8 @@
   使用下面的命令去build upgrade package (去除了worker BundlingTypes):
   yarn -s bazel build --config=snapshot-build --strategy=BundlingTypes=remote,standalone,local //packages/upgrade:npm_package
   最后运行 yarn run build 去重新build所有packages，这时由于upgrade包没有更改，不会重新build它，所以不会报错，最后将build结果放到/dist/packages-dist目录里。
+8.yarn global add file:/f:/Sources/sorcery   or yarn global add link:/f:/Sources/sorcery  (这是我的repository里的sorcery)， sorcery的作用是替换sourcemap文件里的源文件路径到正确的angular源码文件位置。
+   也可以尝试思考用yarn add link: <path> 或 yarn link 和yarn link package。
+9.npm i -g http-server
+10. 切换到cli-hello-world目录执行yarn run build （现在执行sorcery命令时有可能报有些文件找不到，暂时不管）
+11. 在VSCode里debug配置选择Launch Chrome(cli-hello-world)，在cli-hello-world项目的main.ts里设置断点， 按F5进行调试。
