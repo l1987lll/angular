@@ -7,12 +7,13 @@ const path = require('path');
 const packagePath = path.resolve('./package.json');
 const {sourcemapOverrides} = JSON.parse(fs.readFileSync(packagePath));
 
-var command = sourcemapOverrides
-                  .map(function(override) {
-                    return `sorcery -x -i "${override.file}" -o "${override.output}" --osp "${
-                        override.sources.join(' , ')}" --orp "${override.sourceRoot.join(' , ')}"`;
-                  })
-                  .join(' && ');
+var command =
+    sourcemapOverrides
+        .map(function(override) {
+          return `sorcery -x -i "${override.file}" -o "${override.output}" --osp "${
+              override.sources.join(' , ')}" --orp "${override.sourceRoot.join(' , ')}" --isc`;
+        })
+        .join(' && ');
 
 try {
   execSync(command);

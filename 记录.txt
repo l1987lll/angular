@@ -17,3 +17,4 @@
 9.npm i -g http-server
 10. 切换到cli-hello-world目录执行yarn run build （现在执行sorcery命令时有可能报有些文件找不到，暂时不管）
 11. 在VSCode里debug配置选择Launch Chrome(cli-hello-world)，在cli-hello-world项目的main.ts里设置断点， 按F5进行调试。
+12. 如果在build时出错，可以尝试执行命令 bazel clean --expunge清除下bazel cache.

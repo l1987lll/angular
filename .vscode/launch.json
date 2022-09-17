@@ -7,7 +7,7 @@
     {
       "name": "Launch Chrome (cli-hello-world)",
       "request": "launch",
-      "type": "pwa-chrome",
+      "type": "chrome",
       "url": "http://127.0.0.1:8080/index.html",
       "webRoot": "${workspaceFolder}/integration/cli-hello-world/dist",
       "outFiles": [

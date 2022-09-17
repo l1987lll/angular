@@ -49,12 +49,20 @@
   },
   "sourcemapOverrides": [
     {
-      "file": "./dist",
+      "file": "./dist/vendor.js",
       "output": "",
       "sources": [],
       "sourceRoot": [
         "cli-hello-world/dist/[^.]+.js$ |  | ../",
         "__ivy_ngcc__ |  | ../"
+      ]
+    },
+    {
+      "file": "./dist/main.js",
+      "output": "",
+      "sources": [],
+      "sourceRoot": [
+        "cli-hello-world/dist/[^.]+.js$ |  | ../"
       ]
     }
   ]
